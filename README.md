@@ -43,8 +43,8 @@ Swagger 접속 URL: http://localhost:3000/api-docs
 일부 API는 로그인이 필요하거나, 특정 역할 권한이 필요할 수 있습니다. 그러한 경우 Swagger 에서 다음과 같은 방식으로 로그인할 수 있습니다.
 1. `/auth-api/auth/sign-in` API를 호출합니다.
 2. swagger 화면 우상단의 Authorize 버튼을 누르고 응답 결과의 `accessToken` 항목을 복사 붙여넣기 합니다.
-
-TODO: 이미지 추가하기
+![스크린샷 2025-05-20 오후 3 09 23](https://github.com/user-attachments/assets/b4985104-dee3-43f9-80ec-d7e14e04ec1e)
+![스크린샷 2025-05-20 오후 3 09 16](https://github.com/user-attachments/assets/2ef68a4a-163f-4487-8f75-8eb2d9c3aae2)
 
 ### MongoDB 로컬 접근
 서비스는 내부적으로 2대의 MongoDB 인스턴스를 사용합니다. 디버깅을 위해 DataGrip 또는 MongoDB Compass와 같은 도구로 로컬에서 확인이 필요하신 경우 아래 주소로 DB를 접근할 수 있습니다. (인증 없음, **운영환경에선 포트 노출 삭제 필요**)
