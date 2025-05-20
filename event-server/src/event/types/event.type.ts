@@ -1,21 +1,4 @@
-// 복합 조건
-export type AndCondition = {
-  type: 'and';
-  conditions: Condition[];
-};
-export type OrCondition = {
-  type: 'or';
-  conditions: Condition[];
-};
-export type NotCondition = {
-  type: 'or';
-  condition: Condition;
-};
-export type Condition =
-  | PremitiveCondition
-  | AndCondition
-  | OrCondition
-  | NotCondition;
+export type Condition = PremitiveCondition[];
 
 export type PremitiveCondition =
   | QuestCondition

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { EventService } from './event.service';
-import { CreateEventDto } from './dtos/event.dto';
+import { CreateEventDto, SetRewardDto } from './dtos/event.dto';
+import { UserId } from 'src/common/decorator/user-id.decorator';
 
 @Controller('event')
 export class EventController {
@@ -24,11 +25,29 @@ export class EventController {
     };
   }
 
-  @Get(':id')
-  async getDetail(@Param('id') id: string) {
+  @Get(':eventId')
+  async getDetail(@Param('eventId') id: string) {
     const event = await this.eventService.getEventDetail(id);
     return {
       event,
+    };
+  }
+
+  @Post(':eventId/set-reward')
+  async setReward(@Param('eventId') id: string, @Body() dto: SetRewardDto) {
+    const event = await this.eventService.setReward(id, dto);
+    return {
+      message: '보상 설정에 성공했습니다.',
+      event,
+    };
+  }
+
+  @Post(':eventId/request-reward')
+  async requestReward(@Param('eventId') id: string, @UserId() userId: string) {
+    const rewardReceipt = await this.eventService.provideReward(id, userId);
+    return {
+      message: '보상 수령에 성공했습니다.',
+      rewardReceipt,
     };
   }
 }

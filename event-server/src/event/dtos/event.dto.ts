@@ -11,3 +11,7 @@ export class CreateEventDto {
   condition: Condition;
   rewards: Reward[];
 }
+
+export class SetRewardDto {
+  rewards: Reward[];
+}

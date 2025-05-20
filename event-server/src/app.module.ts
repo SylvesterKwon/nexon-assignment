@@ -3,11 +3,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EventModule } from './event/event.module';
 import mongoDbConfig from './config/mongo-db.config';
+import serviceUrlConfig from './config/service-url.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [mongoDbConfig],
+      load: [mongoDbConfig, serviceUrlConfig],
       isGlobal: true,
     }),
     MongooseModule.forRootAsync({
