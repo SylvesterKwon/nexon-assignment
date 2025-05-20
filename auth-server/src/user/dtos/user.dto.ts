@@ -30,3 +30,9 @@ export class SetRoleDto {
   @IsEnum(Role)
   role: Role;
 }
+
+export class SetStatusDto {
+  completedQuestIds?: string[];
+  loginStreak?: number;
+  referralCount?: number;
+}

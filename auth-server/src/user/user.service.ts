@@ -53,4 +53,35 @@ export class UserService {
     user.role = newRole;
     await user.save();
   }
+
+  async getStatus(userId: string) {
+    const user = await this.userModel.findById(userId);
+    if (!user) throw new NotFoundException('사용자를 찾을 수 없습니다.');
+
+    return {
+      completedQuestIds: user.completedQuestIds,
+      loginStreak: user.loginStreak,
+      referralCount: user.referralCount,
+    };
+  }
+
+  async setStatus(
+    userId: string,
+    status: {
+      completedQuestIds?: string[];
+      loginStreak?: number;
+      referralCount?: number;
+    },
+  ) {
+    const user = await this.userModel.findById(userId);
+    if (!user) throw new NotFoundException('사용자를 찾을 수 없습니다.');
+
+    if (status.completedQuestIds !== undefined)
+      user.completedQuestIds = status.completedQuestIds;
+    if (status.loginStreak !== undefined) user.loginStreak = status.loginStreak;
+    if (status.referralCount !== undefined)
+      user.referralCount = status.referralCount;
+
+    await user.save();
+  }
 }
