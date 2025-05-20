@@ -18,7 +18,9 @@ export class UserService {
     @InjectModel(User.name) private userModel: Model<User>,
     private jwtService: JwtService,
     private configService: ConfigService,
-  ) {}
+  ) {
+    this.createRootUser();
+  }
 
   async createUser(username: string, password: string) {
     const existingUser = await this.userModel.findOne({ username });
@@ -83,5 +85,22 @@ export class UserService {
       user.referralCount = status.referralCount;
 
     await user.save();
+  }
+
+  async createRootUser() {
+    const existingUser = await this.userModel.findOne({
+      username: process.env.ROOT_USERNAME,
+    });
+    if (existingUser) return;
+    const hashedPassword = await hash(
+      process.env.ROOT_PASSWORD,
+      this.saltRounds,
+    );
+    const rootUser = new this.userModel({
+      username: process.env.ROOT_USERNAME,
+      hashedPassword,
+      role: Role.ADMIN,
+    });
+    await rootUser.save();
   }
 }
