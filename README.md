@@ -110,7 +110,7 @@ async createEvent(@Req() req: Request) {
 
 ## TODO
 - [ ] 복잡한 중첩된 이벤트 완료 조건을 지원하기. 예시:
-    ```json
+    ```
     {
         "operator": "and", // or, not, ...
         "conditions": [...]
